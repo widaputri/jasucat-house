@@ -41,5 +41,5 @@ class Product(models.Model):
     price = models.IntegerField()
     description = models.TextField()
     stock = models.IntegerField()
-''''
+'''
 Di blok kode di atas, objek Product melambangkan satu tabel di basis data, sedangkan name, price, description, dan stock melambangkan kolom-kolom di tabel tersebut.
