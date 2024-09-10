@@ -5,7 +5,7 @@ def show_main(request):
     context = {
         'name' : 'Cat Collar',
         'price': '20000',
-        'description': 'lorem'
+        'description': 'lorem',
     }
 
     return render(request, "main.html", context)
