@@ -35,11 +35,11 @@ Django berbasis python yang jika dibandingkan dengan bahasa pemrograman lain ter
 
 ## Mengapa model pada Django disebut sebagai ORM?
 ORM adalah teknik pemrograman yang digunakan untuk berinteraksi dengan basis data lewat pemetaan objek dalam suatu bahasa pemrograman ke tabel dalam basis data relasional. Misal:
-'''
+```
 class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
     stock = models.IntegerField()
-'''
+```
 Di blok kode di atas, objek Product melambangkan satu tabel di basis data, sedangkan name, price, description, dan stock melambangkan kolom-kolom di tabel tersebut.
