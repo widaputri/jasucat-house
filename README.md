@@ -72,5 +72,5 @@ Mengimport ke urls.py di main dan menambahkan path yang sesuai.
 ## GET Postman
 ![JSON](ss_json.png)
 ![XML](ss_xml.png)
-![JSON by ID](ss_json_by_id.png)
-![XML by ID](ss_xml_by_id.png)
+![JSON by ID](ss_json_id.png)
+![XML by ID](ss_xml_id.png)
