@@ -74,3 +74,29 @@ Mengimport ke urls.py di main dan menambahkan path yang sesuai.
 ![XML](ss_xml.png)
 ![JSON by ID](ss_json_id.png)
 ![XML by ID](ss_xml_id.png)
+
+# Tugas 4
+## Apa perbedaan antara HttpResponseRedirect() dan redirect()
+Perbedaan HttpResponseRedirect() dan redirect() terletak di fleksibilitas dan penggunaannya. HttpResponseRedirect() merupakan response yang class-based, yang hanya menerima URL untuk redirection, sehingga pengguna harus menyediakan URL penuhnya secara manual. Sedangkan, redirect merupakan fungsi shortcut yang menerima tidak hanya URL, tapi juga nama view atau instance model, yang membuatnya lebih fleksibel dan mudah digunakan.
+
+## Jelaskan cara kerja penghubungan model Product dengan User!
+Penghubungan dilakukan dengan cara menambahkan user sebagai salah satu foreign key dari Product atau dengan kata lain menyimpan atribut user untuk tiap produk yang dibuat. Sebelum hasilnya tersimpan, tiap produk yang dibuat akan dihubungkan dengan user yang sedang logged in. Kita juga bisa menampilkan produk user tertentu dengan memfilter semua produk berdasarkan atribut user.
+
+## Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+Authentication dan authorization adalah dua konsep berbeda dalam keamanan projek Django kita. Authentication memastikan identitas user, memverifikasi siapa mereka, biasanya melalui proses login dengan username dan password. Authorization terjadi setelah authentication, menentukan apa yang diizinkan pengguna lakukan berdasarkan hak akses mereka. Dalam Django, authentication dilakukan saat pengguna login, menggunakan fungsi bawaan seperti authenticate() untuk memverifikasi kredensial dan login() untuk membuat sesi pengguna. Setelah login, Django menggunakan middleware dan decorators seperti @login_required untuk mengelola authorization, memastikan hanya pengguna yang memiliki izin yang dapat mengakses fitur atau halaman tertentu berdasarkan sistem izin yang terintegrasi dengan model user dan groups.
+
+## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat pengguna yang telah login menggunakan session cookies. Saat pengguna login, Django membuat sesi yang mengasosiasikan user dengan server, dan informasi sesi disimpan di cookie yang dikirim ke browser. Browser kemudian mengirimkan cookie ini bersama setiap permintaan, memungkinkan Django mengenali pengguna tanpa memerlukan login ulang. Selain untuk sesi login, cookies juga digunakan untuk menyimpan preferensi pengguna, pengaturan situs, dan data lainnya yang membantu pengalaman pengguna. Namun, tidak semua cookies aman; cookies yang tidak terenkripsi atau memiliki konfigurasi yang salah bisa disalahgunakan untuk serangan seperti session hijacking. Oleh karena itu, Django menyediakan pengaturan seperti SECURE_COOKIE dan HttpOnly untuk memastikan cookies hanya dapat diakses melalui HTTPS dan tidak dapat diakses oleh JavaScript, meningkatkan keamanan cookies.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+Django menyediakan UserCreationForm yang dapat kita gunakan secara mudah. Kita hanya perlu membuat fungsi register di views.py yang memvalidasi input, menyimpan hasil, dan meredirect ke main page ketika sukses membuat akun. Begitu pula untuk login, Django sudah menyediakan AuthenticationForm. Di views.py, kita hanya perlu membuat fungi login_user yang memanfaatkan fungsi bawaan login(). Untuk logout, kita juga hanya perlu mendefinisikan logout_user di views.py yang memanfaatkan fungsi logout(). Selanjutnya kita hanya perlu melengkapi html dan melakukan routing yang sesuai. 
+
+### Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+Ini dapat dilakukan langsung di user interface yang sudah kita buat. Register, login, tambah produk, lalu logout.
+
+### Menghubungkan model Product dengan User.
+Terjawab di atas.
+
+### Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+Pertama kita harus membuat cookie last_login menggunakan method set_cookie di sebuah Response dan menyimpan waktu di fungsi login kita. Lalu, karena kita ingin menampilkan di main page, kita dapat memodifikasi context show_main kita untuk menambahkan informasi cookie last_login. Untuk menampilkannya, kita hanya perlu menggunakan template tags di main.html dan untuk menampilkan username, kita hanya perlu memanggil atribut nama user yang sedang logged in (response.user.username).
