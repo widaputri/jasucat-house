@@ -18,7 +18,8 @@ def show_main(request):
     products = Product.objects.filter(user=request.user)
 
     context = {
-        'name': request.user.username,
+        'name': 'Wida Putri Kinasih',
+        'user_logged_in': request.user.username,
         'class': 'PBP D',
         'npm': '2306229840',
         'products' : products,
@@ -28,7 +29,7 @@ def show_main(request):
     return render(request, "main.html", context)
 
 def create_product(request):
-    form = ProductForm(request.POST or None)
+    form = ProductForm(request.POST, request.FILES)
 
     if form.is_valid() and request.method == "POST":
         product = form.save(commit=False)

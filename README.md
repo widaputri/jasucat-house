@@ -100,3 +100,55 @@ Terjawab di atas.
 
 ### Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
 Pertama kita harus membuat cookie last_login menggunakan method set_cookie di sebuah Response dan menyimpan waktu di fungsi login kita. Lalu, karena kita ingin menampilkan di main page, kita dapat memodifikasi context show_main kita untuk menambahkan informasi cookie last_login. Untuk menampilkannya, kita hanya perlu menggunakan template tags di main.html dan untuk menampilkan username, kita hanya perlu memanggil atribut nama user yang sedang logged in (response.user.username).
+
+# Tugas 5
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Jika suatu elemen HTML dipengaruhi oleh beberapa CSS selector, urutan prioritas yang menentukan selector mana yang akan digunakan disebut Specificity. Berikut adalah urutan prioritas CSS selector dari yang paling rendah ke paling tinggi:
+- Elemen (misalnya, div, p, h1) — Specificity: 0,0,0,1
+- Kelas (class) (misalnya, .class-name) — Specificity: 0,0,1,0
+- Pseudokelas (misalnya, :hover, :nth-child()) — Specificity: 0,0,1,0
+- ID (misalnya, #id-name) — Specificity: 0,1,0,0
+- Inline style (misalnya, style="color: red;") — Specificity: 1,0,0,0
+- !important — Mengalahkan semua aturan lainnya, terlepas dari specificity selector.
+CSS akan menggunakan selector dengan specificity tertinggi. Jika specificity dua selector sama, maka urutannya dilihat dari aturan yang didefinisikan terakhir di file CSS.
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design adalah teknik desain web yang memungkinkan tampilan aplikasi atau website menyesuaikan diri dengan berbagai ukuran layar atau perangkat, seperti smartphone, tablet, dan desktop. Ini sangat penting karena:
+- Pengguna mengakses web dari berbagai perangkat dengan ukuran layar yang berbeda-beda.
+- Meningkatkan user experience (UX) di semua perangkat.
+- Google memprioritaskan situs yang mobile-friendly dalam hasil pencarian (SEO).
+Contoh aplikasi:
+- Sudah menerapkan: Twitter, YouTube, dan Medium.
+- Belum menerapkan: SIAK NG
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+### Margin
+Jarak antara elemen dengan elemen lain di luar elemen tersebut. Contoh di CSS:
+```
+.element {
+  margin: 20px;
+}
+```
+### Border
+Garis yang mengelilingi konten elemen, berada di antara margin dan padding. Contoh di CSS:
+```
+.element {
+  border: 2px solid black;
+}
+```
+### Padding
+Jarak antara konten di dalam elemen dengan batas (border) elemen tersebut. Contoh di CSS:
+```
+.element {
+  padding: 10px;
+}
+```
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+### Flexbox (Flexible Box Layout)
+Layout ini dirancang untuk mendistribusikan ruang dalam sebuah kontainer dan menyusun item secara fleksibel. Flexbox berguna untuk one-dimensional layout, di mana elemen bisa disusun secara horizontal (row) atau vertical (column). Flexbox sangat berguna ketika menyusun elemen-elemen seperti navigasi atau card secara sejajar.
+### Grid Layout
+Grid layout adalah teknik yang lebih canggih daripada Flexbox untuk two-dimensional layout (baris dan kolom). Grid memungkinkan untuk membuat struktur layout yang lebih kompleks dengan kontrol penuh terhadap kolom dan baris. Grid sangat bermanfaat dalam membangun layout halaman yang memiliki struktur grid seperti dashboard atau gallery.
+
+Keduanya menawarkan cara yang berbeda untuk mendesain layout yang fleksibel, dengan Flexbox untuk layout satu dimensi dan Grid untuk layout dua dimensi.
+

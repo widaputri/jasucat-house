@@ -5,8 +5,10 @@
 {% endblock meta %}
 
 {% block content %}
+{% include 'navbar.html' %}
+<div class="m-24 justify-center gap-10 flex flex-col items-center">
 <div class="login">
-  <h1>Login</h1>
+  <h1 class="object-center text-center text-4xl font-extrabold">Login</h1>
 
   <form method="POST" action="">
     {% csrf_token %}
@@ -28,5 +30,5 @@
   {% endif %} Don't have an account yet?
   <a href="{% url 'main:register' %}">Register Now</a>
 </div>
-
+</div>
 {% endblock content %}

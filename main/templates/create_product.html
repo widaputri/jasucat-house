@@ -1,8 +1,11 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Add New Product</h1>
+{% include 'navbar.html' %}
+<div class="m-24 justify-center gap-10 flex flex-col items-center">
 
-<form method="POST">
+<h1 class="object-center text-center text-4xl font-extrabold">Add New Product</h1>
+
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
@@ -14,5 +17,5 @@
     </tr>
   </table>
 </form>
-
+</div>
 {% endblock %}

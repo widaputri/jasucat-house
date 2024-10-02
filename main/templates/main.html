@@ -1,63 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 {% include 'navbar.html' %}
-<h1>Jasucat House</h1>
-
-<h2> Nama: </h2>
-<p>{{ name }}<p>
-<h2> Kelas: </h2>
-<p>{{ class }}<p>
-<h2> NPM: </h2>
-<p>{{ npm }}<p>
+<div class="m-24 justify-center gap-10 flex flex-col items-center">
+<img src="static/images/logosvg.svg" alt="Jasucat House" class="object-center align-middle" />
+<h1 class="object-center text-center text-8xl font-extrabold">Jasucat House</h1>
+<h2 class="font-semibold text-center text-orange-500"> {{ name }} | {{class}} | {{ npm }}</h2>
 
 {% if not products %}
+<img src="static\images\jasu_mad.jpg" alt="No product yet" class="object-center align-middle h-48 rounded" />
 <p>Belum ada produk di Jasucat House.</p>
-{% else %}
-<table>
-    <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Description</th>
-    <th>Stock</th>
-    </tr>
 
-    {% comment %} Berikut cara memperlihatkan data mood di bawah baris ini 
-    {% endcomment %} 
-    {% for product in products %}
-    <tr>
-    <td>{{product.name}}</td>
-    <td>{{product.price}}</td>
-    <td>{{product.description}}</td>
-    <td>{{product.stock}}</td>
-    <td>
-      <a href="{% url 'main:edit_product' product.pk %}">
-          <button>
-              Edit
-          </button>
-      </a>
-    </td>
-    <td>
-      <a href="{% url 'main:confirm_delete_product' product.pk %}">
-          <button>
-              Delete
-          </button>
-      </a>
-    </td>
-    </tr>
-    {% endfor %}
-</table>
+{% else %}
+<div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 w-full">
+  {% for product in products %}
+      {% include 'card_product.html' with product=product %}
+  {% endfor %}
+</div>
 {% endif %}
 
 <br />
 
-<a href="{% url 'main:create_product' %}">
-    <button>Add New Product</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-
-<h5>User logged in: {{ request.user.username }}</h5>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
 {% endblock content %}

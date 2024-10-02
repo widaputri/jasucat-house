@@ -1,41 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="font-sans">
-    <div class="bg-gray-800 p-4 flex justify-between items-center">
-        <a href="#" class="text-white text-lg">Home</a>
-        <div class="md:hidden flex flex-col cursor-pointer" onclick="toggleMenu()">
-            <div class="w-6 h-1 bg-white mb-1"></div>
-            <div class="w-6 h-1 bg-white mb-1"></div>
-            <div class="w-6 h-1 bg-white"></div>
-        </div>
-        <div class="hidden md:flex space-x-4" id="menu">
-            <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">About</a>
-            <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Services</a>
-            <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Contact</a>
-        </div>
+{% extends 'base.html' %}
+{% block content %}
+<div class="bg-white p-4 flex justify-between items-center drop-shadow-md fixed w-screen top-0 left-0">
+    <a href="#" class="text-black text-lg"><img src='static/images/logosvg.svg' class="w-10"></a>
+    <div class="md:hidden flex flex-col cursor-pointer" onclick="toggleMenu()">
+        <div class="w-6 h-1 bg-black mb-1"></div>
+        <div class="w-6 h-1 bg-black mb-1"></div>
+        <div class="w-6 h-1 bg-black"></div>
     </div>
-
-    <div class="md:hidden flex flex-col space-y-2 p-4 bg-gray-800 hidden" id="mobile-menu">
-        <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">About</a>
-        <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Services</a>
-        <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded">Contact</a>
+    <div class="hidden md:flex space-x-4" id="menu">
+        {% if user.is_authenticated %}
+            <p class="text-black font-semibold px-3 py-2 rounded">Halo, {{ user.username }}!</p>
+            <a href="#" class="text-black font-semibold hover:bg-gray-200 px-3 py-2 rounded">Products</a>
+            <a href="/create-product" class="text-white font-semibold bg-orange-400 hover:bg-orange-500 px-3 py-2 rounded">Create product</a>
+            <a href="{% url 'main:logout' %}" class="text-white font-semibold bg-red-400 hover:bg-red-500 px-3 py-2 rounded">Logout</a>
+        {% else %}
+            <p class="text-black font-semibold px-3 py-2 rounded">Welcome, Guest!</p>
+        {% endif %}
     </div>
+</div>
 
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
+<div class="md:hidden flex flex-col space-y-2 p-4 bg-white hidden fixed w-screen top-16 left-0" id="mobile-menu">
+    {% if user.is_authenticated %}
+        <p class="text-black font-semibold px-3 py-2 rounded">Halo, {{ user.username }}!</p>
+        <a href="#" class="text-black font-semibold hover:bg-gray-200 px-3 py-2 rounded">Products</a>
+        <a href="/create-product" class="text-white font-semibold bg-orange-400 hover:bg-orange-500 px-3 py-2 rounded">Create product</a>
+        <a href="{% url 'main:logout' %}" class="text-white font-semibold bg-red-400 hover:bg-red-500 px-3 py-2 rounded">Logout</a>
+    {% else %}
+        <p class="text-black font-semibold px-3 py-2 rounded">Welcome, Guest!</p>
+    {% endif %}
+</div>
+
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
         }
-    </script>
-</body>
-</html>
+    }
+</script>
+{% endblock content %}

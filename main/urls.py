@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, edit_product, confirm_delete_product, delete_product
 
 app_name = 'main'
@@ -16,4 +18,4 @@ urlpatterns = [
     path('edit-product/<uuid:id>', edit_product, name='edit_product'),
     path('delete-product/<uuid:id>/', confirm_delete_product, name='confirm_delete_product'),  # Confirmation route
     path('delete-product/execute/<uuid:id>/', delete_product, name='delete_product'),  # Actual deletion
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
