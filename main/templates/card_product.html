@@ -7,7 +7,7 @@
         <p class="text-gray-700 text-sm mb-4">Stock: <span class="font-semibold">{{ product.stock }}</span></p>
         <div class="flex space-x-2">
             <a href="{% url 'main:edit_product' product.pk %}" class="text-white font-semibold bg-orange-400 hover:bg-orange-500 px-3 py-2 rounded">Edit</a>
-            <a href="{% url 'main:delete_product' product.pk %}" class="text-white font-semibold bg-red-400 hover:bg-red-500 px-3 py-2 rounded">Delete</a>
+            <a href="{% url 'main:confirm_delete_product' product.pk %}" class="text-white font-semibold bg-red-400 hover:bg-red-500 px-3 py-2 rounded">Delete</a>
             </a>
         </div>
     </div>
