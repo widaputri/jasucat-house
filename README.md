@@ -195,3 +195,21 @@ Validasi dan pembersihan di backend membantu menjaga integritas data dalam datab
 Mengandalkan frontend saja dapat menyebabkan inkonsistensi, terutama jika berbagai klien (misalnya, aplikasi mobile atau alat pihak ketiga) mengirimkan data ke server. Pembersihan di backend menjamin bahwa semua data yang diterima memenuhi standar yang sama.
 ### Pengalaman Pengguna
 Meskipun validasi di frontend memberikan umpan balik cepat, validasi di backend memberikan jaminan bahwa data akhir yang diproses oleh server adalah valid. Ini mengurangi risiko kesalahan yang mungkin muncul dari data yang tidak valid.
+
+##  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+### Implementasi AJAX GET untuk menampilkan data product 
+Langkah pertama adalah menyiapkan halaman utama yang menampilkan data produk. Sebelumnya, data ini mungkin diambil langsung dari server saat halaman di-load, tetapi sekarang kita ubah menjadi asinkron dengan AJAX GET agar lebih dinamis.
+Langkah awal adalah menyiapkan tampilan HTML di mana data produk pengguna akan ditampilkan. Pastikan elemen tersebut memiliki ID atau class tertentu agar bisa diakses oleh JavaScript.
+JavaScript untuk AJAX GET: Buat fungsi JavaScript yang menggunakan fetch() atau jQuery.ajax() untuk mengambil data produk dari server. Fungsi ini akan dikaitkan ke URL yang mengarah ke view Django yang hanya mengembalikan data produk milik pengguna yang sedang login.
+Backend Django: Buat view baru atau modifikasi view yang sudah ada di Django untuk memfilter data produk berdasarkan pengguna yang sedang login. Pastikan view tersebut hanya mengembalikan JSON yang berisi data produk.
+Render di frontend: Setelah data produk berhasil diambil dari server, gunakan JavaScript untuk menampilkan data tersebut pada halaman tanpa reload. Misalnya, data bisa di-render ke dalam elemen div sebagai cards yang berisi informasi produk pengguna.
+### Implementasi AJAX POST untuk menambah data produk
+Bagian berikutnya adalah membuat modal form yang dapat digunakan untuk menambahkan data produk baru, dan ini akan dilakukan menggunakan AJAX POST.
+Tombol untuk membuka modal: Buat tombol di halaman utama yang saat diklik akan membuka modal. Modal ini berisi form untuk menambahkan data produk. Modal tersebut bisa dibuat menggunakan HTML dan CSS, atau framework UI seperti Bootstrap.
+Menambahkan event listener: Saat tombol ditekan, event listener di JavaScript akan membuka modal. Pastikan form di modal memiliki ID atau class yang bisa diakses JavaScript.
+AJAX POST saat submit: Ketika pengguna submit form untuk menambahkan produk, buat event listener di JavaScript yang menangani form submission. Gunakan fetch() untuk mengirimkan data form tersebut ke server secara asinkronus tanpa reload halaman.
+Backend Django: Buat view baru yang menangani request POST untuk path /create-ajax/. View ini bertanggung jawab untuk memvalidasi data yang dikirimkan, menyimpannya ke dalam database, dan mengembalikan respons berupa JSON yang menunjukkan status sukses atau gagal.
+Handling modal: Jika penambahan produk berhasil (ditandai dengan respons JSON yang menunjukkan status sukses), JavaScript akan menutup modal dan membersihkan input form agar kosong kembali. Sebaliknya, jika terjadi error (misalnya validasi form gagal), tampilkan pesan error pada modal tanpa menutupnya.
+### Refresh halaman secara asinkronus setelah menambah produk
+Setelah produk baru berhasil ditambahkan, halaman utama harus menampilkan data terbaru tanpa reload seluruh halaman.
+AJAX GET setelah POST sukses: Setelah mendapatkan respons sukses dari server, panggil kembali fungsi AJAX GET yang sudah dibuat sebelumnya untuk memperbarui daftar produk di halaman utama. Dengan begitu, daftar produk yang ditampilkan akan langsung diperbarui tanpa perlu reload halaman.
