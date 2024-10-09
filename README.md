@@ -187,3 +187,11 @@ Cross-Site Request Forgery (CSRF) adalah serangan di mana penyerang mencoba untu
 Jika kita menggunakan AJAX untuk melakukan POST ke server, kita perlu memastikan bahwa token CSRF disertakan dalam permintaan. Namun, jika kita tidak ingin mengharuskan pengguna untuk mengirim token CSRF, kita dapat menggunakan decorator csrf_exempt untuk mengecualikan view tertentu dari pemeriksaan CSRF.
 
 ## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+### Keamanan
+Meskipun validasi dilakukan di frontend, pengguna dapat memanipulasi atau menonaktifkan skrip JavaScript. Pembersihan data di backend memastikan bahwa data yang diterima aman dan tidak berbahaya.
+### Integritas Data
+Validasi dan pembersihan di backend membantu menjaga integritas data dalam database. Ini penting untuk mencegah penyimpanan data yang tidak valid atau berbahaya.
+### Standar dan Konsistensi
+Mengandalkan frontend saja dapat menyebabkan inkonsistensi, terutama jika berbagai klien (misalnya, aplikasi mobile atau alat pihak ketiga) mengirimkan data ke server. Pembersihan di backend menjamin bahwa semua data yang diterima memenuhi standar yang sama.
+### Pengalaman Pengguna
+Meskipun validasi di frontend memberikan umpan balik cepat, validasi di backend memberikan jaminan bahwa data akhir yang diproses oleh server adalah valid. Ini mengurangi risiko kesalahan yang mungkin muncul dari data yang tidak valid.
