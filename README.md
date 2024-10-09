@@ -152,3 +152,38 @@ Grid layout adalah teknik yang lebih canggih daripada Flexbox untuk two-dimensio
 
 Keduanya menawarkan cara yang berbeda untuk mendesain layout yang fleksibel, dengan Flexbox untuk layout satu dimensi dan Grid untuk layout dua dimensi.
 
+# Tugas 6
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+### Interaktivitas
+JavaScript memungkinkan pengembang untuk menambahkan interaktivitas ke halaman web, seperti menu dropdown, modals, dan animasi. Ini meningkatkan pengalaman pengguna dan membuat aplikasi web lebih menarik.
+### Manipulasi DOM
+Dengan JavaScript, kita dapat mengubah konten HTML dan CSS di halaman web secara dinamis. Ini memungkinkan pembaruan konten tanpa harus memuat ulang halaman, memberikan pengalaman yang lebih mulus.
+### Asynchronous Programming
+JavaScript mendukung pemrograman asinkron, memungkinkan pengembang untuk membuat aplikasi yang responsif dengan melakukan pemanggilan API (seperti menggunakan fetch) tanpa menghalangi eksekusi skrip lainnya.
+### Pengelolaan Event
+JavaScript menyediakan cara untuk menangani berbagai peristiwa (event) di browser, seperti klik, hover, dan scroll. Ini membantu dalam meningkatkan interaksi pengguna dengan aplikasi.
+### Pengembangan Aplikasi Single Page (SPA)
+Framework dan pustaka JavaScript seperti React, Angular, dan Vue.js memungkinkan pengembang untuk membuat aplikasi SPA, di mana hanya bagian tertentu dari halaman yang dimuat ulang, mengurangi waktu muat dan meningkatkan kinerja.
+# Validasi Form
+JavaScript memungkinkan validasi form di sisi klien sebelum data dikirim ke server, membantu mengurangi beban pada server dan memberikan umpan balik langsung kepada pengguna.
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+### Fungsi await:
+await digunakan untuk menunggu hasil dari Promise. Saat kita menggunakan await dengan fetch(), JavaScript akan menunggu hingga permintaan jaringan selesai dan mengembalikan respons sebelum melanjutkan eksekusi kode di bawahnya.
+### Tanpa await:
+Jika kita tidak menggunakan await, kode akan terus dieksekusi tanpa menunggu respons dari fetch(). Ini berarti bahwa variabel yang menyimpan hasil dari fetch() mungkin belum diisi ketika kita mencoba menggunakannya, yang dapat menyebabkan kesalahan.
+```
+async function fetchData() {
+    const response = fetch("http://example.com/api/data");
+    // Tanpa await, response belum terisi.
+    console.log(response); // Ini mungkin akan mencetak Promise, bukan data.
+}
+```
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+### CSRF Protection
+Cross-Site Request Forgery (CSRF) adalah serangan di mana penyerang mencoba untuk melakukan tindakan tanpa izin pada akun pengguna. Django secara default melindungi terhadap serangan ini dengan memerlukan token CSRF dalam permintaan POST.
+### Decorator csrf_exempt
+Jika kita menggunakan AJAX untuk melakukan POST ke server, kita perlu memastikan bahwa token CSRF disertakan dalam permintaan. Namun, jika kita tidak ingin mengharuskan pengguna untuk mengirim token CSRF, kita dapat menggunakan decorator csrf_exempt untuk mengecualikan view tertentu dari pemeriksaan CSRF.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?

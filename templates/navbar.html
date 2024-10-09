@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="bg-white p-4 flex justify-between items-center drop-shadow-md fixed w-screen top-0 left-0">
-    <a href="#" class="text-black text-lg"><img src='static/images/logosvg.svg' class="w-10"></a>
+    <a href="#" class="text-black text-lg"><img src="{% static 'images/logosvg.svg' %}" class="w-10"></a>
     <div class="md:hidden flex flex-col cursor-pointer" onclick="toggleMenu()">
         <div class="w-6 h-1 bg-black mb-1"></div>
         <div class="w-6 h-1 bg-black mb-1"></div>

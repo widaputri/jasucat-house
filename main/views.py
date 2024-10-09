@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from main.forms import ProductForm
 from main.models import Product
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -12,17 +12,17 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 @login_required(login_url='/login')
 def show_main(request):
-    products = Product.objects.filter(user=request.user)
 
     context = {
         'name': 'Wida Putri Kinasih',
         'user_logged_in': request.user.username,
         'class': 'PBP D',
         'npm': '2306229840',
-        'products' : products,
         'last_login': request.COOKIES['last_login'],
     }
 
@@ -40,12 +40,40 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 
+
+@csrf_exempt
+@require_POST 
+def create_product_ajax(request):
+    try:
+        name = request.POST.get('productName')
+        price = request.POST.get('price')
+        description = request.POST.get('description')
+        stock = request.POST.get('stock')
+        image = request.FILES.get('image')
+
+        if not all([name, price, description, stock, image]):
+            return JsonResponse({'error': 'All fields are required'}, status=400)
+
+        product = Product(
+            name=name,
+            price=price,
+            description=description,
+            stock=stock,
+            image=image,
+            user=request.user
+        )
+        product.save()
+
+        return JsonResponse({'message': 'Product created successfully'}, status=201)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
 def show_xml(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 # by IDs
@@ -79,6 +107,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
 
    else:
       form = AuthenticationForm(request)

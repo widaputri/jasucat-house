@@ -2,11 +2,11 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="m-24 justify-center gap-10 flex flex-col items-center">
-<h1 class="object-center text-center text-4xl font-extrabold">Are you sure you want to delete {{ product.name }}?</p>
+<h1 class="object-center text-center text-4xl font-extrabold">Are you sure you want to delete {{ product.name }}?</h1>
 <form method="POST" action="{% url 'main:delete_product' product.id %}">
     {% csrf_token %}
-    <button type="submit">Confirm</button>
-    <a href="{% url 'main:show_main' %}"><button type="button">Cancel</button></a>
+    <button type="submit" class="text-white font-semibold bg-red-400 hover:bg-red-500 px-3 py-2 rounded">Confirm</button>
+    <a href="{% url 'main:show_main' %}" class="text-white font-semibold bg-orange-400 hover:bg-orange-500 px-3 py-2 rounded"><button type="button">Cancel</button></a>
 </form>
 </div>
 {% endblock %}
